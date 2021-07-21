@@ -19,12 +19,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
+h1 {
   margin: 40px 0 0;
+  padding: 20px;
+  color: #333;
+  background-color: #E2C044;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 code {
   font-size: 20px;
+  color: #333;
+  padding: 10px;
+  background-color: #E2C044;
+   border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 a {

@@ -37,7 +37,7 @@ props: [
 }
 </script>
 
-<style>
+<style scoped>
 ul {
      padding-inline-start: 0px;
 
