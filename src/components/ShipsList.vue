@@ -1,53 +1,53 @@
 <template>
   <div class="container">
-      <input v-model='searchShips' type="text" placeholder="Search the ship"/>
-      <ul>
-      <!-- <router-link class="project-link" :to="{ path: `projects/${url}`, params: { testString: 'a dynamic string' } }" exact> -->
+    <!-- ARAMA KISMI -->
+    <input v-model="searchShips" type="text" placeholder="Search the ship" />
+    <!-- Gemilerin listelendiği alan -->
+    <div class="loading" v-if="isLoading">LOADING...</div>
+    <ul v-else>
       <ship-card class="shipcards" :filteredShips="filteredShips"></ship-card>
-       <!-- <li class="starship-item" v-for="(ship, index) in filteredShips" :key="index">
-          <img class="ship-image" src="../assets/starship.png"/>
-        <p><span>Name:</span> {{ ship.name }}</p>
-        <p><span>Model:</span> {{ ship.model }}</p>
-        <p><span>Rating:</span> {{ ship.hyperdrive_rating }}</p>
-      </li> -->
-      </ul>
+    </ul>
   </div>
 </template>
 
 <script>
-import ShipCard from "@/components/ShipCard.vue"
+import ShipCard from "@/components/ShipCard.vue";
 
 export default {
   name: "ShipsList",
   components: {
-    ShipCard
+    ShipCard,
   },
   data() {
     return {
       ships: [],
-      searchShips: '',
+      isLoading: true,
+      searchShips: "",
     };
   },
-
   created() {
     this.fetchShips();
   },
+
+  //API yakalamak ve filtreleme işlemleri burada gerçekleşiyor.
   methods: {
     fetchShips() {
       this.$http.get("https://swapi.dev/api/starships/").then((response) => {
         this.ships = response.data.results;
+        this.isLoading = false;
       });
     },
   },
   computed: {
     filteredShips() {
-      return this.ships.filter((ship) => (
-        ship.name.includes(this.searchShips) || ship.model.includes(this.searchShips)
-      ));
-    }
-  }
+      return this.ships.filter(
+        (ship) =>
+          ship.name.toLowerCase().includes(this.searchShips.toLowerCase()) ||
+          ship.model.toLowerCase().includes(this.searchShips.toLowerCase())
+      );
+    },
+  },
 };
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -61,6 +61,14 @@ export default {
 }
 .shipcards {
   display: grid;
-  grid-template-columns: 450px 450px ;
+  grid-template-columns: 450px 450px;
+}
+
+.loading {
+  background: #000;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 80px;
+  padding: 100px;
 }
 </style>

@@ -1,8 +1,10 @@
 <template>
 <div>
+
+  <!-- Gemilerin ana sayfada listelenmesinde kullanılan component ve maplenmesi -->
   <ul  v-for="(ship) in filteredShips" :key="ship.name">
+    <!-- single page'lere link verilmesi -->
     <router-link :to="`/ship/${ship.name}`">
-    <!-- <router-link :to="{name : 'ship', params: {id: ship.id}}"> -->
       <li class="starship-item">
         <div>
       <img class="ship-image" src="../assets/starship.png"/>
@@ -27,13 +29,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 ul {
      padding-inline-start: 0px;
 }
 li {
-  background-color: #1E2019;
-  border: 3px solid #E2C044;
+  background-color: #000;
+  border: 3px solid #000;
   border-radius: 10px;
     overflow: hidden;
   list-style: none;
@@ -42,11 +44,12 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  transition: 1s;
 }
 
 li:hover {
-  border: 5px solid #E2C044;
-  transition: 0.2s;
+  border: 3px solid #FFE81F;
+  transition: 1s;
 }
 
 .ship-image {
@@ -63,7 +66,7 @@ li:hover .ship-image {
 
 
 .info-container {
-  background-color: #1E2019;
+  background-color: #000;
   z-index: 1;
 }
 p {
@@ -71,8 +74,7 @@ p {
     color: #D3D0CB;
 }
 p span {
-  font-weight: bold;
-  color: #E2C044;
+  color: #FFE81F;
 }
 
 
@@ -82,13 +84,13 @@ a {
 }
 
 a:active p {
-  color: #E2C044 ;
+  color: #FFE81F ;
 }
 a:active span {
   color: #D3D0CB ;
 }
 
 a:active li {
-  opacity: .5;
+  opacity: .9;
 }
 </style> 

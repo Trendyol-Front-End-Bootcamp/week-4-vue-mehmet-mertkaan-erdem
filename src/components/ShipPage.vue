@@ -1,78 +1,105 @@
 <template>
-<div>
-  <!-- <ul  v-for="(ship) in filteredShips" :key="ship.name">
-      <li class="starship-item">
-      <img class="ship-image" src="../assets/starship.png"/>
-      <p><span>Name:</span> {{ $route.params.name }}</p>
-      <p><span>Model:</span> {{ ship.model }}</p>
-      <p><span>Rating:</span> {{ ship.hyperdrive_rating }}</p>
-      <p><span>Passengers:</span> {{ ship.passengers }}</p>
-      <p><span>Max Speed:</span> {{ ship.max_atmosphering_speed }}</p>
-      <p><span>Manufacturer:</span> {{ ship.manufacturer }}</p>
-      <p><span>Crew:</span> {{ ship.crew }}</p>
-      <p><span>Cargo Capacity:</span> {{ ship.cargo_capacity }}</p>
-      </li> 
-  </ul> -->
- <div> {{ $route.params.name }} </div>
- <div> {{ $route.params.model }} </div>
- <!-- <div> {{ ship.name }} </div> -->
+  <div>
+    <!-- Geminin detay sayfası -->
+    <div class="loading" v-if="isLoading">LOADING...</div>
+    <ul v-else v-for="ship in filteredShips" :key="ship.name">
+        <li class="starship-item">
+        <p><span>Name:</span> {{ $route.params.name }}</p>
+        <p><span>Model:</span> {{ ship.model }}</p>
+        <p><span>Rating:</span> {{ ship.hyperdrive_rating }}</p>
+        <p><span>Passengers:</span> {{ ship.passengers }}</p>
+        <p><span>Max Speed:</span> {{ ship.max_atmosphering_speed }}</p>
+        <p><span>Manufacturer:</span> {{ ship.manufacturer }}</p>
+        <p><span>Crew:</span> {{ ship.crew }}</p>
+        <p><span>Cargo Capacity:</span> {{ ship.cargo_capacity }}</p>
+        </li> 
+    </ul>
   </div>
 </template>
 
 
 <script>
+import axios from "axios";
 export default {
- name: "ShipPage",
-props: [
-'name',
-'length',
-'model'
-],
-    // computed: {
-    //     ship() {
-    //     return this.$store.getters.ship(this.name)
-    //     }
-    // }
+  name: "ShipPage",
+  data() {
+    return {
+      ships: [],
+      isLoading: true,
+    }
+  },
+  props: [
+    'name',
+    'length',
+    'model'
+  ],
+  created() {
+    let url = `https://swapi.dev/api/starships/?search=${this.name}`;
+    axios.get(url).then(response => (
+      this.ships = response.data.results,
+      this.isLoading = false
+    )).catch(err => console.error(err));
+  
+  },
+
+  //model ve isme göre filtreleme
+  computed: {
+    filteredShips() {
+      return this.ships.filter((ship) => (
+        ship.name === this.name || ship.model === this.model
+      ))
+    }
+  }
 
 }
+
 </script>
+
 
 <style scoped>
 ul {
-     padding-inline-start: 0px;
-
-
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
 li {
-  border: 1px solid #42b983;
+  background-color: #000;
+  border: 3px solid #000;
+  border-radius: 10px;
     overflow: hidden;
-  padding: 20px;
   list-style: none;
   transition: 0.2s;
-  position: relative;
-  align-content: center;
-  margin: 10px 10px 10px 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  transition: 1s;
+  width: 30%;
 }
 
 li:hover {
-  border: 3px solid #42b983;
-  transition: 0.2s;
-}
-p {
-    font-weight: bold;
-    color: #333;
-}
-p span {
-  font-weight: bold;
-  color: #42b983;
+  border: 3px solid #FFE81F;
+  transition: 2s;
 }
 
-.ship-image {
-z-index: -1;
-width: 80%;
-left: 15%;
-opacity: .5;
-top: -5%;
-position: absolute;
+.info-container {
+  background-color: #000;
+}
+
+
+p {
+    font-weight: bold;
+    color: #D3D0CB;
+}
+p span {
+  color: #FFE81F;
+}
+.loading {
+  background: #000;
+  font-size: 40px;
+  font-weight: bold;
+  margin: 80px;
+  padding: 100px;
 }
 </style> 
