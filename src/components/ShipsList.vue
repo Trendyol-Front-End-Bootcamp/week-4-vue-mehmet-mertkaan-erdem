@@ -59,6 +59,26 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
+input {
+  border: 3px solid #FFE81F;
+  border-radius: 2px;
+  padding: 10px;
+  width: 15vw;
+  text-align: center;
+  line-height: 10px;
+  color: #999;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+input::placeholder {
+  color: #999;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+
 .shipcards {
   display: grid;
   grid-template-columns: 450px 450px;
