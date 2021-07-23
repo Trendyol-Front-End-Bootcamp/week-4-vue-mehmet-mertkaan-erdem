@@ -1,9 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <code>
-      First try on Vue
-    </code>
+
  
   </div>
 </template>
@@ -24,17 +22,8 @@ h1 {
   padding: 20px;
   color: #000;
   background-color: #FFE81F;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 2px;
 }
 
-code {
-  font-size: 20px;
-  color: #000;
-  padding: 10px;
-  background-color: #FFE81F;
-   border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
 
 </style>

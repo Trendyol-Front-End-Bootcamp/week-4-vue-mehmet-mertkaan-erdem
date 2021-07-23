@@ -14,6 +14,7 @@
         <p><span>Cargo Capacity:</span> {{ ship.cargo_capacity }}</p>
         </li> 
     </ul>
+    <router-link class="back-button" to="/ships">Back</router-link>
   </div>
 </template>
 
@@ -101,5 +102,9 @@ p span {
   font-weight: bold;
   margin: 80px;
   padding: 100px;
+}
+.back-button{
+  color: #D3D0CB;
+  font-weight: bold;
 }
 </style> 

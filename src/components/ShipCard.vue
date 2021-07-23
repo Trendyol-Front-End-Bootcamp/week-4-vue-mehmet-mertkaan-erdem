@@ -1,6 +1,5 @@
 <template>
 <div>
-
   <!-- Gemilerin ana sayfada listelenmesinde kullanılan component ve maplenmesi -->
   <ul  v-for="(ship) in filteredShips" :key="ship.name">
     <!-- single page'lere link verilmesi -->
